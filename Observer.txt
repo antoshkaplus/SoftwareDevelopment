@@ -1,0 +1,81 @@
+
+Observer Pattern
+
+//////
+
+The Observer Pattern defines a one-to-many relationship between a set of objects.When the state of one object changes, all of its dependents are notified.
+
+Loose Coupling - connecting objects through notifications
+rather than hard coding a connection.
+
+//////
+
+public interface Subject{
+  public void registerObserver(Observer o);
+  public void removeObserver(Observer o);
+  public void notifyObservers();
+}
+
+public interface Observer{
+  public void update(String operation,String record);
+}
+... Observer Classes ...
+
+public class Database implements Subject{
+  private Vector<Observer> observers;
+  private String operation;
+  private String record;
+  
+  public Database(){
+    observers = new Vector<Observer>();
+  }
+  public void registerObserver(Observer o){
+    observers.add(o);
+  }
+  public void removeObserver(Observer o){
+    observer.remove(o);
+  }
+  public void editRecord(String operation,String record){
+    this.operation = operation;
+    this.record = record;
+    notifyObservers();
+  }
+  public void notifyObservers(){
+    for(Observer o : observers{
+      o.update(operation,record);
+    }
+  }
+}
+
+//////
+
+Java Observer Pattern
+
+public interface Observable{
+  public void addObserver(Observer o);
+  protected void clearChanged();
+  public int countObservers();
+  public void deleteObserver(Observer o);
+  public void deleteObservers();
+  public boolean hasChanged();
+  public void notifyObservers();
+  public void notifyObservers(Object arg);
+  protected void setChanged();
+}
+
+public interface Observer{
+  public void update(Observable o,Object arg);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

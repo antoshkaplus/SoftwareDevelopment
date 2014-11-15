@@ -1,0 +1,48 @@
+
+Strategy Pattern:
+This design principle comes into play when it makes sense to
+extract code that handles specific tasks from your app.
+
+Creating a family of algorithms lets you choose your strategy 
+by choosing consciously which algorithm(s) you want to work 
+with.
+
+GoF book says: "Define a family of algorithms, encapsulate each one,
+and make them interchangeable. Strategy lets the algorithm vary 
+independently from clients that use it." 
+
+The Strategy Pattern defines a family of algorithms, 
+encapsulates each one, and makes them interchangeable. 
+Strategy lets the algorithm vary independently from clients that use it.
+
+//////
+
+using has-a relationship instead of is-a
+using polymorphism to choose algorithm
+
+We use particular classes of interface GoAlgo, objects of which define
+method for go method. Because of classes small and separate from main classes,
+we can often easy change them. Also we can change GoAlgo at runtime by setGoAlgo
+method.
+
+//////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

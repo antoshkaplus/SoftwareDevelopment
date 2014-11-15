@@ -1,0 +1,70 @@
+
+Decorator Pattern
+
+////// 
+
+The Decorator Pattern attaches additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality
+
+///
+
+close your code for modifications and open for 
+extensions
+
+//////
+
+The GoF book says: "Attach additional responsibilities to an object 
+dynamically. Decorators provide a flexible alternative to subclassing
+for extending functionality."
+
+//////
+
+A stream is something that can benefit from multiple attributes being added to it, independent of one another. I want a big dump of application data in a stream. Great. I also want it encrypted. Oh, in this case I also want it zipped. From this particular client, I want to change the style of line breaks they use as well.
+
+//////
+
+public class Computer{
+  public Computer(){}
+  public description(){ 
+    return "computer";
+  }
+}
+
+# to make sure that wrappers consistent
+public abstract class ComponentDecorator extends Computer{
+  public abstract String description();
+}
+
+public class Disk extends ComponentDecorator{
+  Computer computer;
+  public Disk(Computer c){
+    computer = c
+  }
+  public string description(){
+    return computer.description()+" and a disk";
+  }
+}
+
+public class CD extends ComputerDecorator{
+  Computer computer;
+  public CD(Computer c){
+    computer = c;
+  }
+  public String description(){
+    return computer.description()+" and a CD";
+  }
+}
+
+public class Monitor extends ComponentDecorator{
+  Computer computer;
+  public Monitor(Computer c){
+    computer = c;
+  } 
+  public String description(){
+    return computer.description()+" and a monitor";
+  }
+}
+
+
+
+
+

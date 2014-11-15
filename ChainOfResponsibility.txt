@@ -1,0 +1,69 @@
+
+Chain of Responsibility Pattern
+
+//////
+
+The GoF book says: "Avoid coupling the sender of a request to it's
+receiver by giving more than one object a chance to handle the 
+request. Chain the receiving objects and pass the request along 
+the chain until an object handles it."
+
+If you want to process your notifications using a hierarchical chain
+of objects, this is your pattern.
+
+//////
+
+Example:
+
+interface HelpInterface{
+  public void getHelp(int helpConstant);
+}
+
+public class FrontEnd implements HelpInterface{
+  final int FRONT_END_HELP = 1;
+  HelpInterface successor;
+  public FrontEnd(HelpInterface s){
+    successor = s;
+  }
+  public void getHelp(int helpConstant){
+    if(helpConstant != FRONT_END_HELP){
+      successor.getHelp(helpConstant);
+    }
+    else{
+      ... Handling ...
+    }
+  }
+}
+
+public class IntermediateLayer implements HelpInterface{
+  final int ....
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

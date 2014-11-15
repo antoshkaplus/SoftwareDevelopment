@@ -1,0 +1,82 @@
+ 
+Factory Pattern
+
+//////
+
+The GoF book says: "Define an interface for creating an object,
+but let subclasses decide which class to instantiate. Factory method 
+lets a class defer instantiation to subclasses"
+
+//////
+
+GoF notation
+
+
+public abstract class Connection{
+  public Connection(){}
+  public String description(){
+    return "Generic"
+  }
+} 
+
+... Connection Classes ...
+
+public abstract class ConnectionFactory{
+  public ConnectionFactory(){}
+  protected abstract Connection createConnection(String type);
+}
+
+public class SecureFactory extends ConnectionFactory{
+  public Connection createConnection(String type){
+    if(type.equals("Oracle")){
+      return new SecureOracleConnecition();
+    }else if(type.equals("SQL Server")){
+      return new SecureSqlServerConnection();
+    }else{
+      return new SecureMySqlConnection();
+    }
+  }
+}
+
+//////
+
+The difference between the usual way of creating object factories
+and the GoF way is that the GoF way provides more of a 
+specification for a factory and lets subclasses handle the 
+details
+
+//////
+
+Usual notation
+
+public abstract class Connection{
+  public Connection(){}
+  public String description(){
+    return "Generic"
+  }
+} 
+... Connection Classes ...
+
+class FirstFactory{
+  protected String type;
+  
+  public FirstFactory(String t){
+    type = t;
+  }
+  
+  public Connection createConnection(){
+    if(type.equals("Oracle")){
+      return new OracleConnecition();
+    }else if(type.equals("SQL Server")){
+      return new SqlServerConnection();
+    }else{
+      return new MySqlConnection();
+    }
+  }
+}
+
+FirstFactory factory;
+factory = new FirstFactory("Oracle");
+
+Connection conn = factory.createConnection();
+

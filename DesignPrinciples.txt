@@ -1,0 +1,25 @@
+- Encapsulate what varies.
+- Program to an interface, not an implementation.
+- Favor composition over inheritance. 
+	can change behavior dynamically
+- Strive for loosely coupled designs between objects that interact.
+- Classes should be open for extension but closed for modification.
+- One Class, One Responsibility
+- Depend on abstraction, do not depend on concrete class
+- Principle of Least Knowledge - talk only to your immediate friends:
+
+take any object; now from any method in that object, the principle tells us that we should only invoke methods that belong to:- The object itself- Objects passed in as a parameter to the method 
+- Any object the method creates or instantiates- Any components of the object
+
+Notice that these guidelines tell us not to call methods on objects that were returned from calling other methods!!
+
+- Low level components don’t call high level components (don’t call me, i’ll call you)
+
+
+beverage - napitok
+recur - povtoryt’sy
+cohesion - splochenost’, sceplenie
+sprouting - прорастания
+
+Patterns give us a shared vocabulary.
+
