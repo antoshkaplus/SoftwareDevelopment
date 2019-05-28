@@ -19,30 +19,6 @@ Premature pessimisation, by contrast, concerns the high-level design of code arc
 
 “Avoid membership fees: Where possible, prefer making functions nonmember nonfriends.”
 
-
-# C++
-
-“Destructors, deallocation, and swap never fail.” 
-Destructors, memory deallocation function and swap shouldn’t raise exceptions! (terminate is going to be called)
-
-“Virtual functions only "virtually" always behave virtually: Inside constructors and destructors, they don't. Worse, any direct or indirect call to an unimplemented pure virtual function from a constructor or destructor results in undefined behavior. If your design wants virtual dispatch into a derived class from a base class constructor or destructor, you need other techniques such as post-constructors.”
-
-“Make base class destructors public and virtual, or protected and nonvirtual”
-
-To solve warning: variable defined but never used - evaluate variable (void)x
-
-namespace-level objects zero initialized
-
-“In base classes, consider disabling the copy constructor and copy assignment operator, and instead supplying a virtual Clone member function if clients need to make polymorphic (complete, deep) copies.”
-
-“Avoid making any assignment operator virtual”
-
-“Avoid writing a copy assignment operator that relies on a check for self-assignment in order to work properly; often, that reveals a lack of error safety. Check only if self-assignment is frequent.”
-
-
-
-# OOP
-
 Avoid inheriting from concrete base classes. Need behavior - add non-member function. Need state - add member variable.
 
 “Don't inherit publicly to reuse code (that exists in the base class); inherit publicly in order to be reused (by existing code that already uses base objects polymorphically)”
