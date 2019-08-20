@@ -1,0 +1,54 @@
+
+Singleton Pattern
+
+//////
+
+GoF: "Ensure a class only has one instance,
+and provide a global point of access to it."
+
+//////
+
+Usages:
+- thread pools, 
+- caches, 
+- dialog boxes, 
+- objects that handle preferences and registry settings, 
+- objects used for logging, and objects that act as device drivers to devices like printers and graphics cards.
+
+//////
+
+“One Class, One Responsibility” principle, and yes,you are correct,the Singleton is not only responsible for managing its one instance 
+(and providing global access), it is also responsible for whatever 
+its main role is in your application. 
+
+//////
+
+public class Database{
+  private static Database singleObj = new Database("products");
+  private int record;
+  private String name;
+  
+  private Database(String n){
+    name = n;
+    record = 0;
+  }
+  
+  public void editRecords(String operation){
+    ... operation ...  
+  }
+  
+  public String getName(){
+    return name;
+  }
+
+  public static Database getInstance(String n){
+    return singleObj;
+  }
+}
+
+
+
+
+
+
+

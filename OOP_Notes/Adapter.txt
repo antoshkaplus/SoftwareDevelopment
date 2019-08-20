@@ -1,0 +1,101 @@
+
+Adapter Pattern
+
+//////
+
+The Adapter design pattern lets you fix the interface 
+between objects and classes without having to modify 
+the objects or classes directly. When you are working 
+with store-bought applications, you often can't get inside
+to alter what one application produces to make it more 
+palatable to another applecation.
+
+//////
+
+The GoF book says: "The Adapter pattern lets you convert the
+interface of a class into another interface the client expects.
+Adapter lets classes work together that couldn't otherwise 
+because of incompatible interfaces."
+
+//////
+ 
+Example:
+
+// Old Interface 
+
+public interface AceInterface{
+  public void setName(String n);
+  public String getName();
+}
+
+public class AceClass implements AceInterface{
+  String name;
+  public void setName(String n){
+    name = n;
+  }
+  public String getName(){
+    return name;
+  }
+}
+
+// New Interface
+
+public interface AcmeInterface{
+  public void setFirstName(String f);
+  public void setLastName(String l);
+  public String getFirstName();
+  public String getLastName();
+} 
+
+public class AcmeClass implements AcmeInterface{
+  String firstName;
+  String lastName;
+  
+  public void setFirstName(String f){
+    firstName = f;
+  }
+  public void setLastName(String l){
+    lastName = l;
+  }
+  public String getFirstName(){
+    return firstName;
+  }
+  public String getLastName(){
+    return lastName;
+  }
+}
+
+// Ace to Acme Adapter
+public class AceToAcmeAdapter implements AcmeInterface{
+  AceClass aceObject;
+  String firstName;
+  String lastName;
+  
+  public AceToAcmeAdapter(AceClass a){
+    aceObject = a;
+    firstName = aceObject.getName().split(" ")[0];
+    lastName = aceObject.getName().split(" ")[1];
+  }
+  
+  public void setFirstName(String f){
+    firstName = f;
+  }
+  public void setLastName(String l){
+    lastName = l;
+  }
+  public String getFirstName(){
+    return firstName;
+  }
+  public String getLastName(){
+    return lastName;
+}
+
+//////
+
+Also we can extends AceClass for AceToAcmeAdapter.
+But composition is better than inheritanse.
+
+
+
+
+

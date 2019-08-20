@@ -1,0 +1,20 @@
+
+Flyweight Pattern
+
+//////
+
+This pattern is called flyweight because instead of having 
+to work with many massive, individual objects, you whittle
+them down to a smaller set of more generic objects, called 
+flyweights, that can be configured at runtime to look like the 
+more plentiful, massive objects. Each massive object consumes
+system resources; by extracting what's generic from those 
+massive objects and relying on runtime configuration to mimiv those 
+massive objects, you save those resources.
+
+//////
+
+
+
+
+

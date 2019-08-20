@@ -1,0 +1,22 @@
+
+Facade Pattern
+
+//////
+
+Facade pattern gives you a wrapper that makes the
+original code easier to deal with.
+
+//////
+
+The GoF book says: "The Facade pattern should provide
+a unified interface to a set of interfaces in a system.
+Facade defines a higher-level interface that makes the
+subsystem easier to use."
+
+//////
+
+public class SimpleProductFacade{
+  DifficultProduct difficultProduct;
+  
+  ... ... ...
+} 
