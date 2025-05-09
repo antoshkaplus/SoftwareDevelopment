@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"log"
@@ -14,6 +15,7 @@ import (
 	// which can register database drivers, set up configurations, or perform other setup tasks.
 	// However, the package's namespace is not imported, meaning its functions and
 	// variables cannot be directly accessed.
+	fruitdb "fruit/db"
 
 	_ "github.com/mattn/go-sqlite3" // underneath the package name is sqlite3.
 )
@@ -24,21 +26,18 @@ func check_err(err error) {
 	}
 }
 
-func show_all(db *sql.DB) {
-	rows, err := db.Query("select * from fruit;")
-	check_err(err)
-
-	defer rows.Close()
-	for rows.Next() {
-		var id int
-		var name string
-		var created string
-		err = rows.Scan(&id, &name, &created)
-		check_err(err)
-		fmt.Println(id, name, created)
+func make_sql_str(s string) sql.NullString {
+	return sql.NullString{
+		String: s,
+		Valid:  true,
 	}
-	err = rows.Err()
-	check_err(err)
+}
+
+func show_all(fruit_list []fruitdb.Fruit) {
+	for _, value := range fruit_list {
+		_, err := fmt.Printf("%v %v %v\n", value.ID, value.Name.String, value.Created.String)
+		check_err(err)
+	}
 }
 
 func main() {
@@ -63,20 +62,27 @@ func main() {
 		log.Fatalf("%q: %s\n", err, qry)
 	}
 
-	stmt, err := db.Prepare("insert into fruit(name, created) values(?, ?)")
-	check_err(err)
-	defer stmt.Close()
+	ctx := context.Background()
+	mydb := fruitdb.New(db)
 
-	_, err = stmt.Exec("Apple", time.Now().Format(time.RFC3339))
+	params := fruitdb.CreateFruitParams{
+		Name:    make_sql_str("Apple"),
+		Created: make_sql_str(time.Now().Format(time.RFC3339)),
+	}
+	_, err = mydb.CreateFruit(ctx, params)
 	check_err(err)
 
 	fmt.Println("Print all after insert.")
-	show_all(db)
+	fruit_list, err := mydb.ListFruit(ctx)
+	check_err(err)
+	show_all(fruit_list)
 
-	db.Exec("delete from fruit where name = 'Apple';")
+	mydb.DeleteFruit(ctx, make_sql_str("Apple"))
 
 	fmt.Println("Print all after remove.")
-	show_all(db)
+	fruit_list, err = mydb.ListFruit(ctx)
+	check_err(err)
+	show_all(fruit_list)
 
 	log.Println("End Program")
 }

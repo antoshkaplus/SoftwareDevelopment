@@ -1,0 +1,14 @@
+# Reference:
+# https://medium.com/gravel-engineering/using-sqlc-for-orm-alternative-in-golang-ft-go-migrate-pgx-b9e35ec623b2
+version: "2"
+sql:
+  - engine: "sqlite"
+    # queries refers to where our manually created queries located
+    queries: "query.sql" # will refer a file
+    # schema refers to where our schema definitions located
+    schema: "schema.sql" # will refer a file
+    gen:
+      go:
+        package: "db"
+        out: "db"
+
