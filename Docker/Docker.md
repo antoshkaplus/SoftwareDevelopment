@@ -2,10 +2,12 @@
 * `docker run {container_name / image}`
     Pulls from the docker hub if does not exist locally.
     Add `-d` after `run` to run in detach mode, in background.
+    Also can change behavior of a container by setting environment variables:
+    `docker run -e DEBUG=true -e PORT=4000 {your image}`
+
 * `docker ps`
     List all running containers. Use `-a` also shows stopped or existed containers 
-    since they still take disk space
-    .
+    since they still take disk space.
 * `docker stop {name / id}`
 * `docker rm {name}` 
     Remove stopped or exited container. Reclaims disk space from ran containers.
